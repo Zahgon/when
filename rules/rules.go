@@ -36,10 +36,11 @@ type Match struct {
 	Applier     func(*Match, *Context, *Options, time.Time) (bool, error)
 }
 
-func (m Match) String() string { return m.Text }
+func (m Match) String() string { _ = "STUB: not implemented"; return "" }
 
 func (m *Match) Apply(c *Context, o *Options, t time.Time) (bool, error) {
-	return m.Applier(m, c, o, t)
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 type F struct {
@@ -47,37 +48,6 @@ type F struct {
 	Applier func(*Match, *Context, *Options, time.Time) (bool, error)
 }
 
-func (f *F) Find(text string) *Match {
-	m := &Match{
-		Applier: f.Applier,
-		Left:    -1,
-	}
+func (f *F) Find(text string) *Match { _ = "STUB: not implemented"; return nil }
 
-	indexes := f.RegExp.FindStringSubmatchIndex(text)
-
-	length := len(indexes)
-	if length <= 2 {
-
-		return nil
-	}
-
-	for i := 2; i < length; i += 2 {
-		if m.Left == -1 && indexes[i] >= 0 {
-			m.Left = indexes[i]
-		}
-		// check if capture was found
-		if indexes[i] >= 0 && indexes[i+1] >= 0 {
-			m.Captures = append(m.Captures, text[indexes[i]:indexes[i+1]])
-			m.Right = indexes[i+1]
-		} else {
-			m.Captures = append(m.Captures, "")
-		}
-	}
-
-	if len(m.Captures) == 0 || m.Left == -1 {
-		return nil
-	}
-
-	m.Text = text[m.Left:m.Right]
-	return m
-}
+// check if capture was found

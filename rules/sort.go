@@ -2,28 +2,16 @@ package rules
 
 type MatchByIndex []*Match
 
-func (m MatchByIndex) Len() int {
-	return len(m)
-}
+func (m MatchByIndex) Len() int { _ = "STUB: not implemented"; return 0 }
 
-func (m MatchByIndex) Swap(i, j int) {
-	m[i], m[j] = m[j], m[i]
-}
+func (m MatchByIndex) Swap(i, j int) { _ = "STUB: not implemented"; return }
 
-func (m MatchByIndex) Less(i, j int) bool {
-	return m[i].Left < m[j].Left
-}
+func (m MatchByIndex) Less(i, j int) bool { _ = "STUB: not implemented"; return false }
 
 type MatchByOrder []*Match
 
-func (m MatchByOrder) Len() int {
-	return len(m)
-}
+func (m MatchByOrder) Len() int { _ = "STUB: not implemented"; return 0 }
 
-func (m MatchByOrder) Swap(i, j int) {
-	m[i], m[j] = m[j], m[i]
-}
+func (m MatchByOrder) Swap(i, j int) { _ = "STUB: not implemented"; return }
 
-func (m MatchByOrder) Less(i, j int) bool {
-	return m[i].Order < m[j].Order
-}
+func (m MatchByOrder) Less(i, j int) bool { _ = "STUB: not implemented"; return false }

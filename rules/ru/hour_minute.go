@@ -1,12 +1,7 @@
 package ru
 
 import (
-	"regexp"
-	"strconv"
-	"time"
-
 	"github.com/olebedev/when/rules"
-	"github.com/pkg/errors"
 )
 
 /*
@@ -29,49 +24,8 @@ import (
 // 2. - int
 // 3. - ext?
 
-func HourMinute(s rules.Strategy) rules.Rule {
-	return &rules.F{
-		RegExp: regexp.MustCompile("(?i)(?:\\A|\\s|\\D)" +
-			"((?:[0-1]{0,1}[0-9])|(?:2[0-3]))" +
-			"(?:\\:|：|\\-|\\.)" +
-			"((?:[0-5][0-9]))" +
-			"(?:\\s*(утра|вечера|дня))?" +
-			"(?:\\s|\\D|\\z)"),
-		Applier: func(m *rules.Match, c *rules.Context, o *rules.Options, ref time.Time) (bool, error) {
-			if (c.Hour != nil || c.Minute != nil) && s != rules.Override {
-				return false, nil
-			}
+func HourMinute(s rules.Strategy) rules.Rule { _ = "STUB: not implemented"; return *new(rules.Rule) }
 
-			hour, err := strconv.Atoi(m.Captures[0])
-			if err != nil {
-				return false, errors.Wrap(err, "hour minute rule")
-			}
+// am
 
-			minutes, err := strconv.Atoi(m.Captures[1])
-			if err != nil {
-				return false, errors.Wrap(err, "hour minute rule")
-			}
-
-			c.Minute = &minutes
-
-			if m.Captures[2] != "" {
-				if hour > 12 {
-					return false, nil
-				}
-				switch m.Captures[2] {
-				case "утра": // am
-					c.Hour = &hour
-				case "вечера", "дня": // pm
-					if hour < 12 {
-						hour += 12
-					}
-					c.Hour = &hour
-				}
-			} else {
-				c.Hour = &hour
-			}
-
-			return true, nil
-		},
-	}
-}
+// pm
